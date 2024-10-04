@@ -1,5 +1,3 @@
-package jogopokemon;
-
 import carta.CartaPokemon;
 import carta.Deck;
 import jogador.Jogador;
