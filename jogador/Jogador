@@ -1,0 +1,124 @@
+package jogador;
+
+import carta.CartaPokemon;
+
+public class Jogador {
+    private String nome;
+    private CartaPokemon[] deck;
+    private int controle;
+
+    public Jogador(String nome) {
+        this.nome = nome;
+        this.deck = new CartaPokemon[6];
+        this.controle = 0;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public CartaPokemon[] getDeck() {
+        return deck;
+    }
+
+    public void setDeck(CartaPokemon[] deck) {
+        this.deck = deck;
+    }
+
+    public int getControle() {
+        return controle;
+    }
+
+    public void setControle(int controle) {
+        this.controle = controle;
+    }
+
+    private void inserePrimeiraCartaDeck(CartaPokemon cp){
+        this.deck[0] = cp;
+        this.controle++;
+    }
+
+    private void insereUltimaCartaDeck(CartaPokemon cp){
+        if (this.controle < deck.length) {
+            this.deck[this.controle] = cp;
+            this.controle++;
+        }
+    }
+
+    public void selecionarCarta(CartaPokemon cp) {
+        if (cp == null) {
+            System.out.println("Carta inválida selecionada.");
+            return;
+        }
+
+        if (this.controle == 0) {
+            inserePrimeiraCartaDeck(cp);
+        } else if (this.controle >= 6) {
+            System.out.println("Deck Cheio");
+        } else {
+            insereUltimaCartaDeck(cp);
+        }
+    }
+
+    private void cartaDerrotadaUltima() {
+        this.deck[controle - 1] = null;
+        this.controle--;
+    }
+
+    private void cartaDerrotadaPrimeira() {
+        for (int i = 0; i < this.controle - 1; i++) {
+            this.deck[i] = this.deck[i + 1];
+        }
+        this.deck[controle - 1] = null; 
+        this.controle--;
+    }
+
+    private void cartaDerrotadaMeio(int pos) {
+        for (int i = pos; i < this.controle - 1; i++) {
+            this.deck[i] = this.deck[i + 1];
+        }
+        this.deck[controle - 1] = null;
+        this.controle--;
+    }
+
+    public void CartaDerrotada(int pos) {
+        if (pos < 0 || pos >= controle) {
+            System.out.println("Posição inválida.");
+            return;
+        }
+
+        if (pos == 0) {
+            cartaDerrotadaPrimeira();
+        } else if (pos == controle - 1) {
+            cartaDerrotadaUltima();
+        } else {
+            cartaDerrotadaMeio(pos);
+        }
+    }
+    
+    
+    public CartaPokemon cartaDoTurno(int pos){
+        if(pos >= 0 && pos < deck.length){
+            return this.deck[pos];
+        } else {
+            System.out.println("Índice inválido!");
+            return null;
+        }
+    }
+
+    public void exibirDeck() {
+        System.out.println("Deck de " + nome + ":");
+        for (int i = 0; i < controle; i++) {
+            System.out.println(deck[i]);
+        }
+    }
+    
+    
+    public int retornaQantCartas(){
+        return this.controle;
+    }
+}
