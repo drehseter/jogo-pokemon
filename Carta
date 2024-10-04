@@ -1,0 +1,66 @@
+public class CartaPokemon {
+    private String nome;
+    private int atk;
+    private int def;
+    private int spd;
+    private int hp;
+
+    public CartaPokemon(String nome, int atk, int def, int spd, int hp) {
+        this.nome = nome;
+        this.atk = atk;
+        this.def = def;
+        this.spd = spd;
+        this.hp = hp;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public int getAtk() {
+        return atk;
+    }
+
+    public void setAtk(int atk) {
+        this.atk = atk;
+    }
+
+    public int getDef() {
+        return def;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
+    }
+
+    public int getSpd() {
+        return spd;
+    }
+
+    public void setSpd(int spd) {
+        this.spd = spd;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    @Override
+    public String toString() {
+        return "CartaPokemon { " +
+                "Nome = '" + nome + '\'' +
+                ", Atk = " + atk +
+                ", Def = " + def +
+                ", Spd = " + spd +
+                ", HP = " + hp +
+                " }";
+    }
+}
